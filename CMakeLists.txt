@@ -1,12 +1,21 @@
 cmake_minimum_required(VERSION 3.20)
 
-set(PROJECT_NAME c_template)
+set(T c_template)
 
-project(${PROJECT_NAME} LANGUAGES C)
+project(${T} LANGUAGES C)
 
 set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+#set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_executable(${PROJECT_NAME} main.c)
-target_link_libraries(${PROJECT_NAME} PRIVATE m)
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic)
+set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+add_executable(
+        ${T}
+        ${SOURCE_DIR}/example.c
+        main.c)
+target_include_directories(${T} PRIVATE ${INCLUDE_DIR})
+target_link_libraries(${T} PRIVATE m)
+target_compile_options(${T} PRIVATE -Wall -Wextra -Wpedantic)
